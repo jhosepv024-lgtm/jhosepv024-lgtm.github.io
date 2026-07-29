@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portal principal de aplicaciones, juegos, páginas de privacidad y repositorios de Jose Luis Valladolid Correa.">
+  <meta name="theme-color" content="#07101f">
+  <title>JL Apps Studio | Portal de proyectos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#inicio" aria-label="Ir al inicio">
+      <span class="brand-mark">JL</span>
+      <span id="brandName">JL Apps Studio</span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Abrir menú">☰</button>
+    <nav class="main-nav" id="mainNav">
+      <a href="#destacados">Destacados</a>
+      <a href="#repositorios">Repositorios</a>
+      <a href="#acerca">Acerca de</a>
+      <a href="#contacto">Contacto</a>
+      <a class="nav-cta" id="githubNav" href="#" target="_blank" rel="noopener">Perfil de GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="inicio">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Portal principal · GitHub Pages</span>
+        <h1>Todos mis proyectos desde <span>un solo lugar.</span></h1>
+        <p id="heroDescription">Aplicaciones Android, juegos, servicios, políticas de privacidad y proyectos en desarrollo organizados automáticamente.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#repositorios">Consultar repositorios</a>
+          <a class="button secondary" id="githubHero" href="#" target="_blank" rel="noopener">Abrir GitHub</a>
+        </div>
+        <div class="metrics" id="metrics" aria-live="polite"></div>
+      </div>
+
+      <aside class="portal-preview reveal" aria-label="Resumen del portal">
+        <div class="preview-header"><span>Portal de proyectos</span><span class="online-dot">En línea</span></div>
+        <div class="preview-main">
+          <div class="preview-icon">🚀</div>
+          <strong>Actualización automática</strong>
+          <p>Los repositorios públicos nuevos aparecen sin editar la página.</p>
+        </div>
+        <div class="preview-grid">
+          <div><strong>🎮</strong><span>Juegos</span></div>
+          <div><strong>📱</strong><span>Apps</span></div>
+          <div><strong>🔐</strong><span>Privacidad</span></div>
+          <div><strong>🧰</strong><span>Herramientas</span></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" id="destacados">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Selección principal</span>
+        <h2>Proyectos destacados</h2>
+        <p>Estos proyectos se administran desde <code>assets/config.js</code>. Puedes agregar iconos, enlaces de Google Play, estados y descripciones comerciales.</p>
+      </div>
+      <div class="featured-grid" id="featuredGrid"></div>
+    </section>
+
+    <section class="section repositories-section" id="repositorios">
+      <div class="section-heading reveal">
+        <span class="eyebrow">Consulta automática</span>
+        <h2>Todos los repositorios públicos</h2>
+        <p>La información se obtiene directamente desde el perfil público de GitHub y se ordena por la última actualización.</p>
+      </div>
+
+      <div class="repository-toolbar reveal">
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="repoSearch" type="search" placeholder="Buscar por nombre, descripción o tecnología" autocomplete="off">
+        </label>
+        <select id="repoCategory" aria-label="Filtrar por categoría">
+          <option value="Todos">Todas las categorías</option>
+          <option value="Juegos">Juegos</option>
+          <option value="Aplicaciones">Aplicaciones</option>
+          <option value="Privacidad">Privacidad</option>
+          <option value="Herramientas">Herramientas</option>
+          <option value="Otros">Otros</option>
+        </select>
+        <select id="repoSort" aria-label="Ordenar repositorios">
+          <option value="updated">Última actualización</option>
+          <option value="name">Nombre</option>
+          <option value="stars">Estrellas</option>
+        </select>
+      </div>
+
+      <div class="repo-status reveal" id="repoStatus" role="status">Consultando repositorios…</div>
+      <div class="repository-grid" id="repositoryGrid"></div>
+      <div class="empty-state" id="emptyState" hidden>No se encontraron repositorios con los filtros seleccionados.</div>
+    </section>
+
+    <section class="section about" id="acerca">
+      <div class="about-card reveal">
+        <div>
+          <span class="eyebrow">Sobre el desarrollador</span>
+          <h2 id="developerName">Jose Luis Valladolid Correa</h2>
+          <p id="aboutText"></p>
+        </div>
+        <div class="skills" id="skills"></div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contacto">
+      <div class="contact-card reveal">
+        <div>
+          <span class="eyebrow">Contacto y soporte</span>
+          <h2>Aplicaciones creadas para crecer</h2>
+          <p>Consulta el código público, las páginas de soporte y las políticas de privacidad desde este portal.</p>
+        </div>
+        <div class="contact-actions">
+          <a class="button primary" id="emailButton" href="#">Enviar correo</a>
+          <a class="button secondary" id="githubButton" href="#" target="_blank" rel="noopener">Ver perfil completo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong id="footerBrand">JL Apps Studio</strong><p>Portal central de aplicaciones y repositorios.</p></div>
+    <div class="footer-links"><a href="#destacados">Destacados</a><a href="#repositorios">Repositorios</a><a href="#contacto">Soporte</a></div>
+    <p>© <span id="year"></span> <span id="footerOwner"></span></p>
+  </footer>
+
+  <template id="featuredTemplate">
+    <article class="featured-card reveal">
+      <div class="featured-top"><span class="featured-icon"></span><span class="featured-status"></span></div>
+      <span class="featured-category"></span>
+      <h3 class="featured-title"></h3>
+      <p class="featured-description"></p>
+      <div class="featured-tags"></div>
+      <div class="featured-actions"></div>
+    </article>
+  </template>
+
+  <template id="repoTemplate">
+    <article class="repo-card reveal">
+      <div class="repo-card-header">
+        <div class="repo-symbol">&lt;/&gt;</div>
+        <span class="repo-category"></span>
+      </div>
+      <h3 class="repo-name"></h3>
+      <p class="repo-description"></p>
+      <div class="repo-meta">
+        <span class="repo-language"></span>
+        <span class="repo-updated"></span>
+      </div>
+      <div class="repo-badges"></div>
+      <div class="repo-actions"></div>
+    </article>
+  </template>
+
+  <script src="assets/config.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
