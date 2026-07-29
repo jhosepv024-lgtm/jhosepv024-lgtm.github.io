@@ -4,7 +4,7 @@ window.PORTAL_CONFIG = {
     owner: "Jose Luis Valladolid Correa",
     githubUser: "jhosepv024-lgtm",
     github: "https://github.com/jhosepv024-lgtm",
-    email: "jlvc-125-126@hotmail.com",
+    email: "TU-CORREO@EJEMPLO.COM",
     heroDescription: "Aplicaciones Android, juegos, servicios, políticas de privacidad y proyectos en desarrollo organizados automáticamente.",
     about: "Desarrollador independiente enfocado en aplicaciones Android, juegos creados con Unity, contenido multimedia, Firebase y soluciones digitales fáciles de usar.",
     skills: ["Android", "Kotlin", "Unity", "C#", "Firebase", "GitHub Pages", "HTML", "CSS", "JavaScript"]

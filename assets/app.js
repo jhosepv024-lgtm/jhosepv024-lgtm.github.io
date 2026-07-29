@@ -84,9 +84,12 @@ function renderFeatured() {
 
   config.featured.forEach(project => {
     const fragment = template.content.cloneNode(true);
-    const repoUrl = `${config.site.github}/${project.repo}`;
+    const repoUrl = safeUrl(`${config.site.github}/${project.repo}`);
     const repo = repositories.find(item => item.name.toLowerCase() === project.repo.toLowerCase());
-    const pageUrl = project.website || (repo?.has_pages ? defaultPagesUrl(repo) : "");
+    // Solo mostramos una web pública cuando fue configurada manualmente o
+    // cuando el repositorio declara una homepage válida. Esto evita enlaces
+    // de GitHub Pages que todavía no han sido publicados y terminan en 404.
+    const pageUrl = safeUrl(project.website) || safeUrl(repo?.homepage);
 
     $(".featured-icon", fragment).textContent = project.icon;
     $(".featured-status", fragment).textContent = project.status;
@@ -96,10 +99,10 @@ function renderFeatured() {
     $(".featured-tags", fragment).innerHTML = project.tags.map(tag => `<span>${escapeHtml(tag)}</span>`).join("");
 
     const actions = [
-      `<a href="${repoUrl}" target="_blank" rel="noopener">Repositorio <span>→</span></a>`
+      `<a class="action-button action-primary" href="${repoUrl}" target="_blank" rel="noopener" aria-label="Abrir repositorio de ${escapeHtml(project.title)}">Ver repositorio en GitHub <span>↗</span></a>`
     ];
-    if (pageUrl) actions.push(`<a href="${safeUrl(pageUrl)}" target="_blank" rel="noopener">Ver sitio <span>↗</span></a>`);
-    if (project.playStore) actions.push(`<a href="${safeUrl(project.playStore)}" target="_blank" rel="noopener">Google Play <span>↗</span></a>`);
+    if (pageUrl) actions.push(`<a class="action-button" href="${pageUrl}" target="_blank" rel="noopener">Abrir página web <span>↗</span></a>`);
+    if (safeUrl(project.playStore)) actions.push(`<a class="action-button" href="${safeUrl(project.playStore)}" target="_blank" rel="noopener">Ver en Google Play <span>↗</span></a>`);
     $(".featured-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
@@ -183,10 +186,13 @@ function renderRepositories(items) {
     $(".repo-badges", fragment).innerHTML = badges.map(item => `<span>${escapeHtml(item)}</span>`).join("");
 
     const actions = [
-      `<a href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener">Ver repositorio <span>→</span></a>`
+      `<a class="action-button action-primary" href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener">Ver repositorio en GitHub <span>↗</span></a>`
     ];
-    if (repo.has_pages) actions.push(`<a href="${defaultPagesUrl(repo)}" target="_blank" rel="noopener">Abrir GitHub Pages <span>↗</span></a>`);
-    if (repo.homepage && safeUrl(repo.homepage)) actions.push(`<a href="${safeUrl(repo.homepage)}" target="_blank" rel="noopener">Sitio oficial <span>↗</span></a>`);
+    // La homepage configurada en GitHub es más fiable que asumir que Pages
+    // ya está desplegado únicamente porque has_pages sea verdadero.
+    if (repo.homepage && safeUrl(repo.homepage)) {
+      actions.push(`<a class="action-button" href="${safeUrl(repo.homepage)}" target="_blank" rel="noopener">Abrir página web <span>↗</span></a>`);
+    }
     $(".repo-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
