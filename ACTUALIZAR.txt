@@ -1,0 +1,12 @@
+ACTUALIZACIÓN DEL PORTAL
+
+1. Copia el contenido de esta carpeta sobre ~/Descargas/github-portal-padre
+2. Entra a la carpeta original.
+3. Ejecuta:
+
+   git add .
+   git commit -m "Abrir paginas principales de las apps"
+   git push
+
+Las tarjetas destacadas ahora abren primero la página pública de la app.
+El repositorio queda como botón secundario "Ver código en GitHub".

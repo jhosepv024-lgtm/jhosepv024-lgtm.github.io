@@ -22,7 +22,7 @@ window.PORTAL_CONFIG = {
       description: "Aplicación de radio diseñada para descubrir y escuchar emisoras desde una experiencia rápida y organizada.",
       tags: ["Android", "Radio", "Firebase"],
       playStore: "",
-      website: ""
+      website: "https://jhosepv024-lgtm.github.io/xivora/"
     },
     {
       repo: "aplasta-hormigas-pro",
@@ -33,7 +33,7 @@ window.PORTAL_CONFIG = {
       description: "Juego arcade por niveles con enemigos, objetivos, recompensas y dificultad progresiva.",
       tags: ["Unity", "Android", "Arcade"],
       playStore: "",
-      website: ""
+      website: "https://jhosepv024-lgtm.github.io/aplasta-hormigas-pro/"
     },
     {
       repo: "ajedrez-maestro",
@@ -44,7 +44,7 @@ window.PORTAL_CONFIG = {
       description: "Proyecto de ajedrez con una presentación adaptable para jugadores y páginas públicas del producto.",
       tags: ["Juego", "Web", "GitHub Pages"],
       playStore: "",
-      website: ""
+      website: "https://jhosepv024-lgtm.github.io/ajedrez-maestro/"
     },
     {
       repo: "vibraconnect-privacy",
@@ -55,7 +55,7 @@ window.PORTAL_CONFIG = {
       description: "Aplicación social con historias, comentarios, mensajes y soporte para varios idiomas.",
       tags: ["Android", "Comunidad", "Privacidad"],
       playStore: "",
-      website: ""
+      website: "https://jhosepv024-lgtm.github.io/vibraconnect-privacy/"
     }
   ],
 

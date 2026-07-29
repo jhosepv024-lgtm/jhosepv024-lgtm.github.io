@@ -41,3 +41,14 @@
   border-color: rgba(214, 168, 255, 0.42);
   background: rgba(168, 102, 255, 0.10);
 }
+
+/* El repositorio queda como acción secundaria; la página de la app es la principal. */
+.action-button.action-secondary {
+  background: transparent;
+  border-color: rgba(148, 163, 184, 0.28);
+  color: var(--muted, #aebbd0);
+}
+.action-button.action-secondary:hover {
+  border-color: rgba(192, 132, 252, 0.65);
+  color: var(--text, #eef2ff);
+}

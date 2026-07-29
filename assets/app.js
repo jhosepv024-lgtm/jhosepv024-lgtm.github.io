@@ -98,11 +98,14 @@ function renderFeatured() {
     $(".featured-description", fragment).textContent = project.description;
     $(".featured-tags", fragment).innerHTML = project.tags.map(tag => `<span>${escapeHtml(tag)}</span>`).join("");
 
-    const actions = [
-      `<a class="action-button action-primary" href="${repoUrl}" target="_blank" rel="noopener" aria-label="Abrir repositorio de ${escapeHtml(project.title)}">Ver repositorio en GitHub <span>↗</span></a>`
-    ];
-    if (pageUrl) actions.push(`<a class="action-button" href="${pageUrl}" target="_blank" rel="noopener">Abrir página web <span>↗</span></a>`);
-    if (safeUrl(project.playStore)) actions.push(`<a class="action-button" href="${safeUrl(project.playStore)}" target="_blank" rel="noopener">Ver en Google Play <span>↗</span></a>`);
+    const actions = [];
+    if (pageUrl) {
+      actions.push(`<a class="action-button action-primary" href="${pageUrl}" target="_blank" rel="noopener" aria-label="Abrir página principal de ${escapeHtml(project.title)}">Abrir página de la app <span>↗</span></a>`);
+    }
+    if (safeUrl(project.playStore)) {
+      actions.push(`<a class="action-button" href="${safeUrl(project.playStore)}" target="_blank" rel="noopener">Ver en Google Play <span>↗</span></a>`);
+    }
+    actions.push(`<a class="action-button action-secondary" href="${repoUrl}" target="_blank" rel="noopener" aria-label="Abrir repositorio de ${escapeHtml(project.title)}">Ver código en GitHub <span>↗</span></a>`);
     $(".featured-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
@@ -185,14 +188,12 @@ function renderRepositories(items) {
     if (repo.license?.spdx_id) badges.push(repo.license.spdx_id);
     $(".repo-badges", fragment).innerHTML = badges.map(item => `<span>${escapeHtml(item)}</span>`).join("");
 
-    const actions = [
-      `<a class="action-button action-primary" href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener">Ver repositorio en GitHub <span>↗</span></a>`
-    ];
-    // La homepage configurada en GitHub es más fiable que asumir que Pages
-    // ya está desplegado únicamente porque has_pages sea verdadero.
-    if (repo.homepage && safeUrl(repo.homepage)) {
-      actions.push(`<a class="action-button" href="${safeUrl(repo.homepage)}" target="_blank" rel="noopener">Abrir página web <span>↗</span></a>`);
+    const publicPageUrl = safeUrl(repo.homepage) || (repo.has_pages ? safeUrl(defaultPagesUrl(repo)) : "");
+    const actions = [];
+    if (publicPageUrl) {
+      actions.push(`<a class="action-button action-primary" href="${publicPageUrl}" target="_blank" rel="noopener">Abrir página del proyecto <span>↗</span></a>`);
     }
+    actions.push(`<a class="action-button action-secondary" href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener">Ver código en GitHub <span>↗</span></a>`);
     $(".repo-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
