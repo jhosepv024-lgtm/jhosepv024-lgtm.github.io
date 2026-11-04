@@ -1,12 +1,12 @@
-ACTUALIZACIÓN DEL PORTAL
+ACTUALIZAR EL PORTAL
 
-1. Copia el contenido de esta carpeta sobre ~/Descargas/github-portal-padre
-2. Entra a la carpeta original.
-3. Ejecuta:
+1. Edita los archivos necesarios en este repositorio.
+2. Revisa los cambios antes de confirmarlos.
+3. Publica los cambios en la rama main.
+4. Espera a que GitHub Pages complete la publicación.
+5. Abre https://jhosepv024-lgtm.github.io/ y recarga sin caché (Ctrl + F5).
 
-   git add .
-   git commit -m "Abrir paginas principales de las apps"
-   git push
-
-Las tarjetas destacadas ahora abren primero la página pública de la app.
-El repositorio queda como botón secundario "Ver código en GitHub".
+IMPORTANTE
+- No reemplaces ni elimines google8808e4948b4b6a9f.html mientras se utilice para verificar Google Search Console.
+- No publiques contraseñas, tokens, claves privadas, keystores ni datos personales.
+- Comprueba los enlaces de las aplicaciones antes de marcarlas como disponibles.
