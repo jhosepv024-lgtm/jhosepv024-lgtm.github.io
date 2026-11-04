@@ -31,11 +31,13 @@ function formatName(name) {
 }
 
 function formatDate(date) {
+  const parsed = new Date(date);
+  if (Number.isNaN(parsed.getTime())) return "Fecha no disponible";
   return new Intl.DateTimeFormat("es-PE", {
     day: "2-digit",
     month: "short",
     year: "numeric"
-  }).format(new Date(date));
+  }).format(parsed);
 }
 
 function classifyRepository(repo) {
@@ -63,7 +65,13 @@ function loadSiteData() {
   $("#aboutText").textContent = site.about;
   $("#skills").innerHTML = site.skills.map(skill => `<span>${escapeHtml(skill)}</span>`).join("");
   ["#githubNav", "#githubHero", "#githubButton"].forEach(id => $(id).href = site.github);
-  $("#emailButton").href = `mailto:${site.email}?subject=${encodeURIComponent(`Contacto desde ${site.brand}`)}`;
+  const emailButton = $("#emailButton");
+  const publicEmail = typeof site.email === "string" && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email);
+  if (publicEmail) {
+    emailButton.href = `mailto:${site.email}?subject=${encodeURIComponent(`Contacto desde ${site.brand}`)}`;
+  } else {
+    emailButton.hidden = true;
+  }
   $("#year").textContent = new Date().getFullYear();
 }
 
@@ -115,30 +123,53 @@ function renderFeatured() {
 
 async function fetchRepositories() {
   const status = $("#repoStatus");
-  const api = `https://api.github.com/users/${encodeURIComponent(config.site.githubUser)}/repos?per_page=${config.githubApi.perPage}&sort=updated&type=owner`;
+  const perPage = Math.min(Math.max(Number(config.githubApi.perPage) || 100, 1), 100);
+  const base = `https://api.github.com/users/${encodeURIComponent(config.site.githubUser)}/repos`;
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), 12000);
 
   try {
-    const response = await fetch(api, { headers: { Accept: "application/vnd.github+json" } });
-    if (!response.ok) throw new Error(`GitHub respondió con código ${response.status}`);
+    const all = [];
+    const maxPages = 5; // Límite prudente para no generar tráfico innecesario.
+    for (let page = 1; page <= maxPages; page += 1) {
+      const api = `${base}?per_page=${perPage}&page=${page}&sort=updated&type=owner`;
+      const response = await fetch(api, {
+        headers: { Accept: "application/vnd.github+json" },
+        signal: controller.signal,
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error(`GitHub respondió con código ${response.status}`);
+      const data = await response.json();
+      if (!Array.isArray(data)) throw new Error("Respuesta inesperada de GitHub");
+      all.push(...data);
+      if (data.length < perPage) break;
+    }
 
-    const data = await response.json();
-    repositories = data.filter(repo => {
+    repositories = all.filter(repo => {
       if (config.hiddenRepositories.includes(repo.name)) return false;
       if (!config.githubApi.includeForks && repo.fork) return false;
       if (!config.githubApi.includeArchived && repo.archived) return false;
       return true;
     });
 
-    status.textContent = `${repositories.length} repositorios cargados desde GitHub.`;
+    status.textContent = `${repositories.length} repositorios públicos cargados desde GitHub.`;
     renderMetrics(repositories.length);
     renderFeatured();
     applyRepositoryFilters();
   } catch (error) {
-    console.error(error);
-    status.innerHTML = `No fue posible consultar GitHub en este momento. <a href="${config.site.github}" target="_blank" rel="noopener">Abrir el perfil directamente</a>.`;
-    $("#repositoryGrid").innerHTML = "";
+    console.error("No se pudieron cargar los repositorios públicos:", error);
+    status.textContent = "No fue posible consultar GitHub en este momento. Puedes abrir el perfil público directamente.";
+    const fallback = document.createElement("a");
+    fallback.href = safeUrl(config.site.github);
+    fallback.target = "_blank";
+    fallback.rel = "noopener noreferrer";
+    fallback.textContent = "Abrir perfil de GitHub";
+    if (fallback.href) status.append(" ", fallback);
+    $("#repositoryGrid").replaceChildren();
     $("#emptyState").hidden = true;
     renderMetrics("—");
+  } finally {
+    window.clearTimeout(timeoutId);
   }
 }
 
