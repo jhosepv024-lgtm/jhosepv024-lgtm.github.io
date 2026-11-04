@@ -1,94 +1,47 @@
-# Portal principal de GitHub — JL Apps Studio
+# JL Apps Studio — Portal del desarrollador
 
-Web profesional preparada para funcionar como repositorio padre de la cuenta:
+Sitio público: https://jhosepv024-lgtm.github.io/
 
-`jhosepv024-lgtm`
+Este repositorio contiene el portal público de proyectos de JL Apps Studio, publicado con GitHub Pages desde la rama `main` y la carpeta raíz.
 
-## Nombre recomendado del repositorio
+## Estructura
 
-Crea un repositorio público con este nombre exacto:
+- `index.html`: contenido y estructura del sitio.
+- `assets/styles.css`: diseño adaptable.
+- `assets/app.js`: interacción, filtros y consulta de repositorios públicos.
+- `assets/config.js`: información pública del estudio y proyectos destacados.
+- `google8808e4948b4b6a9f.html`: archivo de verificación de Google Search Console. No eliminar mientras se utilice este método de verificación.
 
-`jhosepv024-lgtm.github.io`
+## Publicación
 
-La dirección principal será:
+En GitHub, abre **Settings → Pages** y comprueba que la fuente de publicación sea la rama `main` y la carpeta `/(root)`.
 
-`https://jhosepv024-lgtm.github.io/`
+Los cambios confirmados en esa rama se publican mediante GitHub Pages. La publicación puede tardar unos minutos.
 
-## Publicación en GitHub Pages
+## Actualizar los proyectos destacados
 
-1. Crea el repositorio `jhosepv024-lgtm.github.io`.
-2. Descomprime este ZIP.
-3. Sube directamente `index.html`, `README.md` y la carpeta `assets` a la raíz del repositorio.
-4. En GitHub abre `Settings` → `Pages`.
-5. En `Build and deployment`, selecciona `Deploy from a branch`.
-6. Selecciona la rama `main` y la carpeta `/root`.
-7. Guarda los cambios.
+Edita `assets/config.js`. Antes de añadir una dirección, comprueba que la página exista y utilice HTTPS. Mantén las descripciones y los estados actualizados. No anuncies una aplicación como publicada si todavía no está disponible para el público.
 
-## Cómo funciona
+## Funcionamiento
 
-La web consulta automáticamente:
-
-`https://api.github.com/users/jhosepv024-lgtm/repos`
-
-Cada repositorio público nuevo aparecerá automáticamente. La web muestra:
-
-- Nombre y descripción.
-- Lenguaje principal.
-- Última actualización.
-- Estrellas y licencia, cuando existan.
-- Estado archivado.
-- Enlace al repositorio.
-- Enlace a GitHub Pages, cuando esté activado.
-- Buscador, filtros y ordenamiento.
-
-## Archivo principal de configuración
-
-Edita:
-
-`assets/config.js`
-
-Desde allí puedes cambiar:
-
-- Nombre del portal.
-- Nombre del desarrollador.
-- Correo.
-- Usuario de GitHub.
-- Descripción profesional.
-- Habilidades.
-- Proyectos destacados.
-- Categorías automáticas.
-- Repositorios ocultos.
-
-## Correo pendiente
-
-Reemplaza en `assets/config.js`:
-
-No publiques una dirección personal si no deseas recibir mensajes no solicitados. El botón de correo permanece oculto cuando no se configura una dirección pública válida.
-
-## Agregar una aplicación destacada
-
-Dentro de `featured`, agrega un objeto similar a este:
-
-```javascript
-{
-  repo: "nombre-del-repositorio",
-  title: "Nombre comercial",
-  category: "Aplicaciones",
-  icon: "📱",
-  status: "Publicado",
-  description: "Descripción profesional de la aplicación.",
-  tags: ["Android", "Kotlin", "Firebase"],
-  playStore: "https://play.google.com/store/apps/details?id=...",
-  website: ""
-}
-```
+El sitio consulta la API pública de GitHub para mostrar repositorios públicos. No utiliza tokens ni necesita que el visitante inicie sesión. Si la API no responde, el portal muestra un aviso y permite abrir el perfil público.
 
 ## Seguridad y privacidad
 
-- No agregues tokens, contraseñas, claves API privadas ni datos de cuentas en `app.js` o `config.js`.
-- Todo archivo publicado en GitHub Pages es público y descargable.
-- El portal muestra el nombre abreviado `Jose Valladolid`; evita publicar nombres legales completos, teléfonos, direcciones o correos personales si no son necesarios.
-- La consulta de repositorios usa únicamente la API pública de GitHub y no necesita credenciales.
-- Se añadió una política CSP mediante meta etiqueta, una política de referencia restrictiva y se eliminó la carga de Google Fonts para reducir solicitudes a terceros.
-- GitHub Pages no permite configurar todos los encabezados HTTP desde archivos estáticos. Para controles como HSTS, `X-Content-Type-Options`, `Permissions-Policy` y protección anti-iframe por encabezado, se necesitaría un proxy/CDN o un hosting que permita definir encabezados.
-- La CSP insertada como meta etiqueta es una defensa adicional del navegador; no sustituye los encabezados HTTP del servidor.
+- Todo archivo de este repositorio que se publique mediante GitHub Pages puede ser leído y descargado por cualquier visitante.
+- No guardes aquí contraseñas, tokens de acceso, claves privadas, archivos de firma, keystores, credenciales de Firebase ni datos personales de terceros.
+- Los valores de `assets/config.js` y el código JavaScript son públicos; nunca los uses para almacenar secretos.
+- Los enlaces externos se limitan a HTTPS y se abren con `noopener noreferrer`.
+- La política CSP del documento restringe scripts, estilos y conexiones a los recursos necesarios. Al entregarse como etiqueta `meta`, no puede aplicar directivas que requieren encabezados HTTP, como `frame-ancestors`.
+- GitHub Pages no ofrece configuración general de encabezados HTTP personalizados mediante un archivo del repositorio. Por ello, algunas protecciones de encabezado requieren otro servicio de alojamiento o un proxy compatible.
+- La consulta a GitHub usa datos públicos y no envía información personal del visitante desde formularios; este portal no contiene formularios de envío.
+- La verificación de Google Search Console depende del archivo HTML de verificación; no publiques ni compartas códigos adicionales de verificación de cuentas.
+
+## Comprobaciones antes de publicar
+
+1. Revisa que los enlaces de cada proyecto abran la página correcta.
+2. Comprueba el sitio en móvil y escritorio.
+3. Revisa la consola del navegador por errores JavaScript o bloqueos CSP.
+4. Verifica que no se hayan añadido secretos ni datos personales a los archivos públicos.
+5. Confirma que la página de GitHub Pages cargue por HTTPS.
+
