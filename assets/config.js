@@ -1,10 +1,9 @@
 window.PORTAL_CONFIG = {
   site: {
     brand: "JL Apps Studio",
-    owner: "Jose Luis Valladolid Correa",
+    owner: "Jose Valladolid",
     githubUser: "jhosepv024-lgtm",
     github: "https://github.com/jhosepv024-lgtm",
-    email: "TU-CORREO@EJEMPLO.COM",
     heroDescription: "Aplicaciones Android, juegos, servicios, políticas de privacidad y proyectos en desarrollo organizados automáticamente.",
     about: "Desarrollador independiente enfocado en aplicaciones Android, juegos creados con Unity, contenido multimedia, Firebase y soluciones digitales fáciles de usar.",
     skills: ["Android", "Kotlin", "Unity", "C#", "Firebase", "GitHub Pages", "HTML", "CSS", "JavaScript"]
