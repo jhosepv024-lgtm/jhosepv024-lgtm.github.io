@@ -63,9 +63,7 @@ Desde allí puedes cambiar:
 
 Reemplaza en `assets/config.js`:
 
-`TU-CORREO@EJEMPLO.COM`
-
-por tu correo real de soporte.
+No publiques una dirección personal si no deseas recibir mensajes no solicitados. El botón de correo permanece oculto cuando no se configura una dirección pública válida.
 
 ## Agregar una aplicación destacada
 
@@ -85,6 +83,12 @@ Dentro de `featured`, agrega un objeto similar a este:
 }
 ```
 
-## Seguridad
+## Seguridad y privacidad
 
-No agregues tokens personales de GitHub en `app.js` o `config.js`. Todo el contenido de una web pública puede ser visto por cualquier visitante.
+- No agregues tokens, contraseñas, claves API privadas ni datos de cuentas en `app.js` o `config.js`.
+- Todo archivo publicado en GitHub Pages es público y descargable.
+- El portal muestra el nombre abreviado `Jose Valladolid`; evita publicar nombres legales completos, teléfonos, direcciones o correos personales si no son necesarios.
+- La consulta de repositorios usa únicamente la API pública de GitHub y no necesita credenciales.
+- Se añadió una política CSP mediante meta etiqueta, una política de referencia restrictiva y se eliminó la carga de Google Fonts para reducir solicitudes a terceros.
+- GitHub Pages no permite configurar todos los encabezados HTTP desde archivos estáticos. Para controles como HSTS, `X-Content-Type-Options`, `Permissions-Policy` y protección anti-iframe por encabezado, se necesitaría un proxy/CDN o un hosting que permita definir encabezados.
+- La CSP insertada como meta etiqueta es una defensa adicional del navegador; no sustituye los encabezados HTTP del servidor.
