@@ -14,10 +14,12 @@ function escapeHtml(value = "") {
 }
 
 function safeUrl(url) {
-  if (!url) return "";
+  if (typeof url !== "string" || !url.trim()) return "";
   try {
     const parsed = new URL(url, window.location.href);
-    return ["http:", "https:", "mailto:"].includes(parsed.protocol) ? parsed.href : "";
+    // El portal solo abre destinos HTTPS y rechaza credenciales embebidas en URLs.
+    if (parsed.protocol !== "https:" || parsed.username || parsed.password) return "";
+    return parsed.href;
   } catch {
     return "";
   }
@@ -136,7 +138,7 @@ async function fetchRepositories() {
       const response = await fetch(api, {
         headers: { Accept: "application/vnd.github+json" },
         signal: controller.signal,
-        cache: "no-store"
+        cache: "default"
       });
       if (!response.ok) throw new Error(`GitHub respondió con código ${response.status}`);
       const data = await response.json();
