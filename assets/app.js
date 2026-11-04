@@ -108,12 +108,12 @@ function renderFeatured() {
 
     const actions = [];
     if (pageUrl) {
-      actions.push(`<a class="action-button action-primary" href="${pageUrl}" target="_blank" rel="noopener" aria-label="Abrir página principal de ${escapeHtml(project.title)}">Abrir página de la app <span>↗</span></a>`);
+      actions.push(`<a class="action-button action-primary" href="${pageUrl}" target="_blank" rel="noopener noreferrer" aria-label="Abrir página principal de ${escapeHtml(project.title)}">Abrir página de la app <span>↗</span></a>`);
     }
     if (safeUrl(project.playStore)) {
-      actions.push(`<a class="action-button" href="${safeUrl(project.playStore)}" target="_blank" rel="noopener">Ver en Google Play <span>↗</span></a>`);
+      actions.push(`<a class="action-button" href="${safeUrl(project.playStore)}" target="_blank" rel="noopener noreferrer">Ver en Google Play <span>↗</span></a>`);
     }
-    actions.push(`<a class="action-button action-secondary" href="${repoUrl}" target="_blank" rel="noopener" aria-label="Abrir repositorio de ${escapeHtml(project.title)}">Ver código en GitHub <span>↗</span></a>`);
+    actions.push(`<a class="action-button action-secondary" href="${repoUrl}" target="_blank" rel="noopener noreferrer" aria-label="Abrir repositorio de ${escapeHtml(project.title)}">Ver código en GitHub <span>↗</span></a>`);
     $(".featured-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
@@ -222,9 +222,9 @@ function renderRepositories(items) {
     const publicPageUrl = safeUrl(repo.homepage) || (repo.has_pages ? safeUrl(defaultPagesUrl(repo)) : "");
     const actions = [];
     if (publicPageUrl) {
-      actions.push(`<a class="action-button action-primary" href="${publicPageUrl}" target="_blank" rel="noopener">Abrir página del proyecto <span>↗</span></a>`);
+      actions.push(`<a class="action-button action-primary" href="${publicPageUrl}" target="_blank" rel="noopener noreferrer">Abrir página del proyecto <span>↗</span></a>`);
     }
-    actions.push(`<a class="action-button action-secondary" href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener">Ver código en GitHub <span>↗</span></a>`);
+    actions.push(`<a class="action-button action-secondary" href="${safeUrl(repo.html_url)}" target="_blank" rel="noopener noreferrer">Ver código en GitHub <span>↗</span></a>`);
     $(".repo-actions", fragment).innerHTML = actions.join("");
 
     grid.appendChild(fragment);
